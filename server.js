@@ -25,16 +25,27 @@ var root = {
   },
   editTodo: (args) => {
     const todo = todos.find((todo) => (todo.id == args.id));
-    Object.assign(todo, args.todo);
-    return todo;
+    if (todo) {
+      Object.assign(todo, args.todo);
+      return todo;
+    }
+    return null;
   },
   deleteTodo: (args) => {
-    const todoIndex = todos.findIndex((todo) => (todo.id == args.id));    
-    if (todoIndex >= 0 ){
+    const todoIndex = todos.findIndex((todo) => (todo.id == args.id));
+    if (todoIndex >= 0) {
       todos.splice(todoIndex, 1);
       return true;
-    } 
-    return false;
+    }
+    return null;
+  },
+  categoriseTodo: (args) => {
+    const todo = todos.find((todo) => (todo.id == args.id));
+    if (todo) {
+      todo.category = args.category;
+      return todo;
+    }
+    return null;
   }
 };
 
